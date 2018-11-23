@@ -6,6 +6,18 @@ Run it;
 vagrant up
 ```
 
+To create read-only policy;
+```bash
+vagrant ssh node01
+vault policy write readonly_policy /vagrant/configurations/policy.hcl
+```
+
+To create read-only token and use for applications;
+```bash
+vagrant ssh node01
+vault token create -display-name=readonly_token -policy=readonly_policy
+```
+
 Use configuration parameters in .NET Core project, you need to change `WebApp\appsettings.json` file:
 
 ```json

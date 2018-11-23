@@ -42,8 +42,6 @@ KillSignal=SIGINT
 [Install]
 WantedBy=multi-user.target
 EOF
-echo "export variable"
-export VAULT_ADDR=http://172.81.81.2:8200
 echo "set sytemctl status"
 sudo systemctl start vault
 sudo systemctl enable vault

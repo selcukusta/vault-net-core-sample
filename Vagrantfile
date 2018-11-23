@@ -27,6 +27,7 @@ Vagrant.configure("2") do |config|
     node.vm.box_check_update = false
     node.vm.hostname = "#{NODE_HOSTNAME}"
     node.vm.network "private_network", ip: NODE_IP, netmask: "255.255.255.0"
+    node.vm.provision "shell", inline: "echo 'export VAULT_ADDR=http://172.81.81.2:8200' >> ~/.bashrc && exit", privileged: false
     node.vm.provision "shell" do |s|
       s.path = "scripts/install.sh"
       s.args = [VAULT_VERSION]
