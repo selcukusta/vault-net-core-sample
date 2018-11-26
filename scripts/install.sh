@@ -22,7 +22,6 @@ sudo chmod 640 /etc/vault.hcl
 echo "create Vault service on systemd"
 sudo cat > /etc/systemd/system/vault.service  << EOF
 [Unit]
-[Unit]
 Description=a tool for managing secrets
 Documentation=https://vaultproject.io/docs/
 After=network.target
@@ -35,6 +34,8 @@ ExecStart=/usr/local/bin/vault server -config=/etc/vault.hcl
 ExecReload=/usr/local/bin/kill --signal HUP $MAINPID
 CapabilityBoundingSet=CAP_SYSLOG CAP_IPC_LOCK
 Capabilities=CAP_IPC_LOCK+ep
+# If you're using ubuntu/bionic64 (Ubuntu 18.04.1 LTS) and get "code=exited, status=213/SECUREBITS" error while trying to start Vault service; below line should be uncommented!
+#AmbientCapabilities=CAP_IPC_LOCK
 SecureBits=keep-caps
 NoNewPrivileges=yes
 KillSignal=SIGINT
